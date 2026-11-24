@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Privacy policy · Anki MCP</title>
+<meta name="description" content="Privacy policy of Anki MCP, a Claude plugin for Anki.">
+<style>
+  :root { --fg: #111; --muted: #555; --bg: #fff; --line: #ddd; }
+  @media (prefers-color-scheme: dark) {
+    :root { --fg: #eee; --muted: #aaa; --bg: #111; --line: #333; }
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; background: var(--bg); color: var(--fg);
+    font: 17px/1.6 -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+  }
+  main { max-width: 640px; margin: 0 auto; padding: 72px 20px; }
+  h1 { font-size: 28px; font-weight: 600; margin: 0 0 8px; letter-spacing: -0.01em; }
+  h2 { font-size: 19px; font-weight: 600; margin: 40px 0 12px; }
+  p, li { color: var(--muted); }
+  p { margin: 0 0 16px; }
+  ul { margin: 0 0 16px; padding-left: 20px; }
+  li { margin: 0 0 8px; }
+  strong { color: var(--fg); font-weight: 600; }
+  code { font: 15px ui-monospace, SFMono-Regular, Menlo, monospace; }
+  .date { margin-bottom: 32px; }
+  a { color: var(--fg); text-decoration: underline; text-underline-offset: 3px; text-decoration-thickness: 1px; }
+  a:hover { text-decoration-thickness: 2px; }
+</style>
+</head>
+<body>
+<main>
+  <h1>Privacy policy</h1>
+  <p class="date"><a href="https://github.com/MichaelPrutkow/anki-mcp">Anki MCP</a>, last updated 24 November 2026</p>
+
+  <p>Anki MCP is a Claude plugin and MCP server that runs on your own computer. It has no account, no analytics and no telemetry. It sends nothing to me or to anyone else for tracking.</p>
+
+  <h2>Your Anki collection</h2>
+  <p>The server talks to your running Anki through the AnkiConnect add-on on <code>http://127.0.0.1:8765</code>, or the address you set in <code>ANKI_CONNECT_URL</code>. Your cards and your review history stay on your computer. The plugin only changes your collection when Claude calls one of its writing tools, and it only deletes notes it created itself.</p>
+
+  <h2>Files on your computer</h2>
+  <ul>
+    <li><strong>Drafts</strong>, cards that are not in Anki yet: <code>~/.anki-mcp/drafts</code>. A draft is deleted when all its cards are added, or after 14 days.</li>
+    <li><strong>Undo journal</strong>: <code>~/.anki-mcp/journal.jsonl</code>. For every change it keeps the note ids and the fields before and after, and for deleted notes their content, so the change can be undone.</li>
+    <li><strong>Pictures</strong> for cards: <code>~/Pictures/Anki MCP</code>. Anki gets a copy when a card that uses one is added.</li>
+    <li><strong>Exports</strong>: a Markdown file, only when you ask for one and only at the path you name.</li>
+    <li><strong>Dependencies</strong>: if uv is not installed, a Python environment in the plugin's data folder.</li>
+  </ul>
+  <p>To remove everything, uninstall the plugin and delete <code>~/.anki-mcp</code> and <code>~/Pictures/Anki MCP</code>. The cards it added carry the tag <code>mcp::created</code> in Anki.</p>
+
+  <h2>Network</h2>
+  <p>The plugin connects to the internet only in these cases:</p>
+  <ul>
+    <li><strong>First start</strong>: uv or pip downloads the plugin's dependencies from the Python Package Index (pypi.org). The same happens once for matplotlib if Claude draws a plot and it is not installed.</li>
+    <li><strong>YouTube</strong>: when you ask for a video, <code>youtube_transcript</code> sends the video's id to YouTube to get its transcript.</li>
+    <li><strong>Image URLs</strong>: when you give an image by its web address, <code>stage_image</code> downloads it from there.</li>
+    <li><strong>AnkiWeb</strong>: when you ask for it, <code>sync</code> makes Anki sync with AnkiWeb under your own Anki account.</li>
+  </ul>
+
+  <h2>Claude</h2>
+  <p>What the tools return, for example your cards, your review statistics or text from a PDF, becomes part of your conversation with Claude. Anthropic handles that conversation under its own <a href="https://www.anthropic.com/legal/privacy">privacy policy</a>.</p>
+
+  <h2>Contact</h2>
+  <p>Open an issue on <a href="https://github.com/MichaelPrutkow/anki-mcp/issues">GitHub</a> or write to <a href="mailto:michael.prutkow@tum.de">michael.prutkow@tum.de</a>.</p>
+</main>
+</body>
+</html>
